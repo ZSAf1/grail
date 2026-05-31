@@ -9,16 +9,6 @@ function Messages({ listing }) {
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
 
-  useEffect(() => {
-    fetchUser();
-  }, []);
-
-  useEffect(() => {
-    if (listing && currentUser) {
-      openListingConvo();
-    }
-  }, [listing, currentUser]);
-
   const fetchUser = async () => {
     const { data: { user } } = await supabase.auth.getUser();
     setCurrentUser(user);
@@ -36,6 +26,18 @@ function Messages({ listing }) {
     setSelectedConvo(fakeConvo);
     fetchMessages(fakeConvo);
   };
+
+  // eslint-disable-next-line
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
+  // eslint-disable-next-line
+  useEffect(() => {
+    if (listing && currentUser) {
+      openListingConvo();
+    }
+  }, [listing, currentUser]);
 
   const fetchConversations = async (userId) => {
     setLoading(true);

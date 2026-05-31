@@ -4,7 +4,6 @@ import { supabase } from '../supabase';
 function Profile() {
   const [activeTab, setActiveTab] = useState('outfits');
   const [editing, setEditing] = useState(false);
-  const [user, setUser] = useState(null);
   const [itemCount, setItemCount] = useState(0);
   const [profile, setProfile] = useState({
     name: '',
@@ -16,14 +15,9 @@ function Profile() {
   const tabs = ['outfits', 'closet', 'selling'];
   const grid = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-  useEffect(() => {
-    fetchUser();
-  }, []);
-
   const fetchUser = async () => {
     const { data: { user } } = await supabase.auth.getUser();
     if (user) {
-      setUser(user);
       const username = user.email.split('@')[0];
       const initials = username.slice(0, 2).toUpperCase();
       const profileData = {
@@ -36,6 +30,11 @@ function Profile() {
       fetchItemCount(user.id);
     }
   };
+
+  // eslint-disable-next-line
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   const fetchItemCount = async (userId) => {
     const { count, error } = await supabase
