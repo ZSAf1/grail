@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../supabase';
 
@@ -31,7 +32,6 @@ function Profile() {
     }
   };
 
-  // eslint-disable-next-line
   useEffect(() => {
     fetchUser();
   }, []);

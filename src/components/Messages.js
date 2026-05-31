@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../supabase';
 
@@ -27,12 +28,10 @@ function Messages({ listing }) {
     fetchMessages(fakeConvo);
   };
 
-  // eslint-disable-next-line
   useEffect(() => {
     fetchUser();
   }, []);
 
-  // eslint-disable-next-line
   useEffect(() => {
     if (listing && currentUser) {
       openListingConvo();
